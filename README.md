@@ -1,2 +1,2 @@
 # UserAccountManagement-BE
-This repository consists of a backend pf User Account Management system 
+This repository consists of a backend of User Account Management system 
