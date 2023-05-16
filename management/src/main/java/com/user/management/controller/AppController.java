@@ -1,10 +1,8 @@
 package com.user.management.controller;
 
+import com.user.management.model.UserDetails;
 import com.user.management.services.UserOperator;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Carine Iradukunda
@@ -25,5 +23,10 @@ public class AppController {
     @GetMapping("/all/users")
     public Object fetchAllUsers(){
         return userOperator.getUsers();
+    }
+
+    @PostMapping("/create/user")
+    public Object insertUser(@RequestBody  UserDetails userDetails){
+        return userOperator.createUser(userDetails);
     }
 }

@@ -19,16 +19,19 @@ import java.sql.*;
 @Component
 public class UserOperation implements UserOperator {
 
-    @Autowired
-    @Qualifier("userdb")
-    DataSource source;
+//    @Autowired
+//    @Qualifier("userdb")
+//    DataSource source;
+//
+
 
     @Override
     public Object getUsers(){
         var response = new User();
         Connection connection = null;
         try {
-            connection = source.getConnection();
+            String jdbcUrl ="jdbc:sqlite:/E:\\USERSMGT\\BE\\UserAccountManagement-BE\\userdb.db";
+            connection = DriverManager.getConnection(jdbcUrl);
             String sql = "Select * from User";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -56,13 +59,17 @@ public class UserOperation implements UserOperator {
         var response = new UserResponse();
         Connection connection = null;
         try {
-            connection = source.getConnection();
-            String sql = "insert into User()values ()";
+            String jdbcUrl ="jdbc:sqlite:/E:\\USERSMGT\\BE\\UserAccountManagement-BE\\userdb.db";
+            connection = DriverManager.getConnection(jdbcUrl);
+            String sql = "INSERT INTO User (LastName,FirstName,Gender,Age,DOB,MaritalStatus,Nationality,NID,AccountStatus,Creation_Time)" +
+                    "values ('"+ userDetails.lastName()+"','"+ userDetails.firstName()+"','"+ userDetails.gender()+"','"+ userDetails.age()+"'," +
+                    "'"+ userDetails.dob()+"','"+ userDetails.maritalStatus()+"','"+ userDetails.nationality()+"','"+ userDetails.nid()+"','UNVERIFIED',DATE())";
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()){
-                response.setLastName( resultSet.getString("LastName"));
-                System.out.println(response.getLastName());
+            int resultSet = statement.executeUpdate(sql);
+            if (resultSet > 0) {
+                System.out.println("ROW INSERTED");
+            } else {
+                System.out.println("ROW NOT INSERTED");
             }
         } catch (SQLException e) {
             System.out.println("Error Connecting to the DB");
