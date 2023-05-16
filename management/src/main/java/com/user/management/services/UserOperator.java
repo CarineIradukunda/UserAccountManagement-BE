@@ -1,6 +1,7 @@
 package com.user.management.services;
 
 import com.user.management.model.User;
+import com.user.management.model.UserDetails;
 
 /**
  * @author Carine Iradukunda
@@ -10,5 +11,5 @@ public interface UserOperator {
 
     Object getUser(int id);
 
-    Object createUser(User user);
+    Object createUser(UserDetails userDetails);
 }
