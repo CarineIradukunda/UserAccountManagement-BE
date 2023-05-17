@@ -138,4 +138,69 @@ public class UserOperation implements UserOperator {
         return response;
     }
 
+
+    @Override
+    public Object requestVerify(UserDetails userDetails){
+        var response = new UserResponse();
+        Connection connection = null;
+        try {
+            String jdbcUrl = environment.getProperty("connection");
+            connection = DriverManager.getConnection(jdbcUrl);
+            String sql = "UPDATE User set AccountStatus = 'PENDING VERIFICATION' where EMAIL = '"+userDetails.email()+"' And AccountStatus = 'UNVERIFIED'";
+            Statement statement = connection.createStatement();
+            int resultSet = statement.executeUpdate(sql);
+            if (resultSet > 0) {
+                String responseQuery = "SELECT * FROM User WHERE EMAIL = '"+userDetails.email()+"'";
+                Statement statement1 = connection.createStatement();
+                ResultSet resultSet1 = statement1.executeQuery(responseQuery);
+                while (resultSet1.next()){
+                    response.setNames(resultSet1.getString("Names"));
+                    response.setEmail(resultSet1.getString("Email"));
+                    response.setMessage("Success");
+                    response.setStatusCode(1000);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error Connecting to the DB");
+            response.setMessage(e.getMessage());
+            response.setStatusCode(1004);
+            throw new RuntimeException(e);
+        }
+
+        return response;
+    }
+
+
+
+    @Override
+    public Object verifyUser(UserDetails userDetails){
+        var response = new UserResponse();
+        Connection connection = null;
+        try {
+            String jdbcUrl = environment.getProperty("connection");
+            connection = DriverManager.getConnection(jdbcUrl);
+            String sql = "UPDATE User set AccountStatus = 'VERIFIED' where EMAIL = '"+userDetails.email()+"' And AccountStatus = 'PENDING VERIFICATION'";
+            Statement statement = connection.createStatement();
+            int resultSet = statement.executeUpdate(sql);
+            if (resultSet > 0) {
+                String responseQuery = "SELECT * FROM User WHERE EMAIL = '"+userDetails.email()+"'";
+                Statement statement1 = connection.createStatement();
+                ResultSet resultSet1 = statement1.executeQuery(responseQuery);
+                while (resultSet1.next()){
+                    response.setNames(resultSet1.getString("Names"));
+                    response.setEmail(resultSet1.getString("Email"));
+                    response.setMessage("Success");
+                    response.setStatusCode(1000);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error Connecting to the DB");
+            response.setMessage(e.getMessage());
+            response.setStatusCode(1004);
+            throw new RuntimeException(e);
+        }
+
+        return response;
+    }
+
 }

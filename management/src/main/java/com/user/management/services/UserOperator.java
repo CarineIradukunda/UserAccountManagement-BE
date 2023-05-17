@@ -16,4 +16,8 @@ public interface UserOperator {
     Object createUser(UserDetails userDetails);
 
     Object login(UserDetails userDetails);
+
+    Object requestVerify(UserDetails userDetails);
+
+    Object verifyUser(UserDetails userDetails);
 }

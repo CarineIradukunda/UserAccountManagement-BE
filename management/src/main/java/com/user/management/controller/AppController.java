@@ -37,4 +37,14 @@ public class AppController {
     public Object checkUser(@RequestBody  UserDetails userDetails){
         return userOperator.login(userDetails);
     }
+
+    @PostMapping("/apply/verify")
+    public Object applyVerification(@RequestBody  UserDetails userDetails){
+        return userOperator.requestVerify(userDetails);
+    }
+
+    @PostMapping("/verify")
+    public Object verifyUser(@RequestBody  UserDetails userDetails){
+        return userOperator.verifyUser(userDetails);
+    }
 }
