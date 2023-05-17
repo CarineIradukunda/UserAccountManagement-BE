@@ -3,11 +3,11 @@ package com.user.management.services;
 import com.user.management.model.User;
 import com.user.management.model.UserDetails;
 import com.user.management.model.UserResponse;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
 import java.sql.*;
 
 /**
@@ -18,10 +18,11 @@ import java.sql.*;
 @Component
 public class UserOperation implements UserOperator {
 
-//    @Autowired
-//    @Qualifier("userdb")
-//    DataSource source;
-//
+    final Environment environment;
+
+    public UserOperation(Environment environment) {
+        this.environment = environment;
+    }
 
 
     @Override
@@ -29,14 +30,17 @@ public class UserOperation implements UserOperator {
         var response = new User();
         Connection connection = null;
         try {
-            String jdbcUrl ="jdbc:sqlite:/E:\\USERSMGT\\BE\\UserAccountManagement-BE\\userdb.db";
+            String jdbcUrl = environment.getProperty("connection");
             connection = DriverManager.getConnection(jdbcUrl);
             String sql = "Select * from User";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()){
-                response.setLastName( resultSet.getString("LastName"));
-                System.out.println(response.getLastName());
+                response.setNames( resultSet.getString("Names"));
+                response.setEmail(resultSet.getString("Email"));
+                response.setGender(resultSet.getString("Gender"));
+                response.setAge(resultSet.getInt("Age"));
+
             }
         } catch (SQLException e) {
             System.out.println("Error Connecting to the DB");
@@ -60,7 +64,7 @@ public class UserOperation implements UserOperator {
         var pwd = userDetails.password();
         var encryptedPwd= BCrypt.hashpw(pwd,BCrypt.gensalt());
         try {
-            String jdbcUrl ="jdbc:sqlite:/E:\\USERSMGT\\BE\\UserAccountManagement-BE\\userdb.db";
+            String jdbcUrl = environment.getProperty("connection");
             connection = DriverManager.getConnection(jdbcUrl);
             String sql = "INSERT INTO User (Names,Gender,Age,DOB,MaritalStatus,Nationality,NID,AccountStatus,Creation_Time,Password,Email)" +
                     "values ('"+ userDetails.names()+"','"+ userDetails.gender()+"','"+ userDetails.age()+"'," +

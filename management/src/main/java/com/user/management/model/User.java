@@ -12,8 +12,8 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class User {
 
-  private String lastName;
-  private String firstName;
+  private String Names;
+  private String Email;
   private String gender;
   private long age;
   private String dob;
