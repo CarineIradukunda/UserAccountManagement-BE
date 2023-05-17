@@ -80,7 +80,7 @@ public class UserOperation implements UserOperator {
             }
         } catch (SQLException e) {
             System.out.println("Error Connecting to the DB");
-            response.setMessage("Failed");
+            response.setMessage(e.getMessage());
             response.setStatusCode(1004);
             throw new RuntimeException(e);
         }
