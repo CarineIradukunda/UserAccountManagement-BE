@@ -25,7 +25,7 @@ public class AppController {
         return userOperator.getUsers();
     }
 
-    @PostMapping("/create/user")
+    @PostMapping("/signup")
     public Object insertUser(@RequestBody  UserDetails userDetails){
         return userOperator.createUser(userDetails);
     }

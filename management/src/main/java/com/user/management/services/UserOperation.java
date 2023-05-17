@@ -3,8 +3,7 @@ package com.user.management.services;
 import com.user.management.model.User;
 import com.user.management.model.UserDetails;
 import com.user.management.model.UserResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -58,21 +57,31 @@ public class UserOperation implements UserOperator {
     public Object createUser(UserDetails userDetails){
         var response = new UserResponse();
         Connection connection = null;
+        var pwd = userDetails.password();
+        var encryptedPwd= BCrypt.hashpw(pwd,BCrypt.gensalt());
         try {
             String jdbcUrl ="jdbc:sqlite:/E:\\USERSMGT\\BE\\UserAccountManagement-BE\\userdb.db";
             connection = DriverManager.getConnection(jdbcUrl);
-            String sql = "INSERT INTO User (LastName,FirstName,Gender,Age,DOB,MaritalStatus,Nationality,NID,AccountStatus,Creation_Time)" +
-                    "values ('"+ userDetails.lastName()+"','"+ userDetails.firstName()+"','"+ userDetails.gender()+"','"+ userDetails.age()+"'," +
-                    "'"+ userDetails.dob()+"','"+ userDetails.maritalStatus()+"','"+ userDetails.nationality()+"','"+ userDetails.nid()+"','UNVERIFIED',DATE())";
+            String sql = "INSERT INTO User (Names,Gender,Age,DOB,MaritalStatus,Nationality,NID,AccountStatus,Creation_Time,Password,Email)" +
+                    "values ('"+ userDetails.names()+"','"+ userDetails.gender()+"','"+ userDetails.age()+"'," +
+                    "'"+ userDetails.dob()+"','"+ userDetails.maritalStatus()+"','"+ userDetails.nationality()+"','"+ userDetails.nid()+"','UNVERIFIED',DATE(),'"+encryptedPwd+"','"+userDetails.email()+"')";
             Statement statement = connection.createStatement();
             int resultSet = statement.executeUpdate(sql);
             if (resultSet > 0) {
-                System.out.println("ROW INSERTED");
-            } else {
-                System.out.println("ROW NOT INSERTED");
+                String responseQuery = "SELECT * FROM User WHERE EMAIL = '"+userDetails.email()+"'";
+                Statement statement1 = connection.createStatement();
+                ResultSet resultSet1 = statement1.executeQuery(responseQuery);
+                while (resultSet1.next()){
+                    response.setNames(resultSet1.getString("Names"));
+                    response.setEmail(resultSet1.getString("Email"));
+                    response.setMessage("Success");
+                    response.setStatusCode(1000);
+                }
             }
         } catch (SQLException e) {
             System.out.println("Error Connecting to the DB");
+            response.setMessage("Failed");
+            response.setStatusCode(1004);
             throw new RuntimeException(e);
         }
 

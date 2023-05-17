@@ -6,13 +6,15 @@ import java.io.Serializable;
  * @author Carine Iradukunda
  */
 public record UserDetails(
-      String lastName,
+      String names,
       String firstName,
       String gender,
       int age,
       String dob,
       String maritalStatus,
       String nationality,
-      String nid
+      String nid,
+      String password,
+      String email
 ) implements Serializable {
 }
