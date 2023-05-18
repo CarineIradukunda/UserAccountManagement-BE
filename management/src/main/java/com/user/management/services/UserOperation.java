@@ -86,7 +86,7 @@ public class UserOperation implements UserOperator {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Error Connecting to the DB");
+            System.out.println(e.getMessage());
             response.setMessage(e.getMessage());
             response.setStatusCode(1004);
             throw new RuntimeException(e);
@@ -100,20 +100,21 @@ public class UserOperation implements UserOperator {
     public Object login(UserDetails userDetails){
         var response = new UserResponse();
         Connection connection = null;
-        var pwd = userDetails.password();
+        var pwd = userDetails.password().trim();
+        System.out.println("NID:"+userDetails.nid() +" PWD" +pwd);
         var encryptedPwd ="";
 
         try {
             String jdbcUrl = environment.getProperty("connection");
             connection = DriverManager.getConnection(jdbcUrl);
-            String responseQuery = "SELECT * FROM User WHERE Email = '"+userDetails.email()+"'";
+            String responseQuery = "SELECT * FROM User WHERE NID = '"+userDetails.nid()+"'";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(responseQuery);
             while (resultSet.next()){
                 encryptedPwd = resultSet.getString("Password");
             }
             if(BCrypt.checkpw(pwd,encryptedPwd)){
-                String responseQuery2 = "SELECT * FROM User WHERE Email = '" + userDetails.email() + "'";
+                String responseQuery2 = "SELECT * FROM User WHERE NID = '" + userDetails.nid() + "'";
                 Statement statement1 = connection.createStatement();
                 ResultSet resultSet1 = statement1.executeQuery(responseQuery2);
                 while (resultSet1.next()) {
