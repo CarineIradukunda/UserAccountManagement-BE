@@ -112,9 +112,7 @@ public class UserOperation implements UserOperator {
         try {
             String jdbcUrl = environment.getProperty("connection");
             connection = DriverManager.getConnection(jdbcUrl);
-            String sql = "INSERT INTO User (Names,Gender,Age,DOB,MaritalStatus,Nationality,NID,AccountStatus,Creation_Time,Password,Email)" +
-                    "values ('"+ userDetails.names()+"','"+ userDetails.gender()+"','"+ userDetails.age()+"'," +
-                    "'"+ userDetails.dob()+"','"+ userDetails.maritalStatus()+"','"+ userDetails.nationality()+"','"+ nid+"','UNVERIFIED',DATE(),'"+encryptedPwd+"','"+userDetails.email().trim()+"')";
+            String sql = "INSERT INTO User (Names,Gender,Age,DOB,MaritalStatus,Nationality,NID,AccountStatus,photo,Creation_Time,Password,Email)values ('"+ userDetails.names()+"','"+ userDetails.gender()+"','"+ userDetails.age()+"','"+ userDetails.dob()+"','"+ userDetails.maritalStatus()+"','"+userDetails.nationality()+"','"+ nid+"','UNVERIFIED','',datetime('now'),'"+encryptedPwd+"','"+userDetails.email().trim()+"')";
             Statement statement = connection.createStatement();
             int resultSet = statement.executeUpdate(sql);
             if (resultSet > 0) {
@@ -128,13 +126,13 @@ public class UserOperation implements UserOperator {
                     response.setStatusCode(1000);
                 }
             }
-            return response;
+
 
         } catch (SQLException e) {
             AppLogger.LOGGER.error("Error While Signing up "+e.getMessage());
-            response.setMessage(e.getMessage());
+            response.setMessage("Failed");
             response.setStatusCode(1004);
-            throw new RuntimeException(e);
+
         }
         finally {
             try {
@@ -145,7 +143,7 @@ public class UserOperation implements UserOperator {
             }
         }
 
-
+        return response;
     }
 
 
@@ -254,6 +252,8 @@ public class UserOperation implements UserOperator {
             Statement statement = connection.createStatement();
             int resultSet = statement.executeUpdate(sql);
             if (resultSet > 0) {
+//SEND EMAIL ON VERIFICATION
+                //CALL EMAIL SERVICE
                 String responseQuery = "SELECT * FROM User WHERE NID = '" + userDetails.nid().trim()+ "'";
                 Statement statement1 = connection.createStatement();
                 ResultSet resultSet1 = statement1.executeQuery(responseQuery);

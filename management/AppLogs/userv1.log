@@ -5684,3 +5684,232 @@ java.lang.IllegalArgumentException: Invalid salt
 2023-05-19T16:33:19.004+02:00  INFO 34332 --- [http-nio-1452-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-05-19T16:33:19.004+02:00  INFO 34332 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2023-05-19T16:33:19.005+02:00  INFO 34332 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-19T16:33:37.792+02:00  INFO 34772 --- [main] c.user.management.ManagementApplication  : Starting ManagementApplication using Java 17.0.6 with PID 34772 (E:\USERSMGT\BE\UserAccountManagement-BE\management\target\classes started by carine.iradukunda in E:\USERSMGT\BE\UserAccountManagement-BE\management)
+2023-05-19T16:33:37.794+02:00  INFO 34772 --- [main] c.user.management.ManagementApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-05-19T16:33:38.367+02:00  INFO 34772 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 1452 (http)
+2023-05-19T16:33:38.373+02:00  INFO 34772 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-19T16:33:38.373+02:00  INFO 34772 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-19T16:33:38.430+02:00  INFO 34772 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-19T16:33:38.430+02:00  INFO 34772 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 611 ms
+2023-05-19T16:33:38.659+02:00  INFO 34772 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 1452 (http) with context path ''
+2023-05-19T16:33:38.665+02:00  INFO 34772 --- [main] c.user.management.ManagementApplication  : Started ManagementApplication in 1.138 seconds (process running for 1.509)
+2023-05-19T16:33:39.717+02:00  INFO 34772 --- [http-nio-1452-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-19T16:33:39.717+02:00  INFO 34772 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-19T16:33:39.718+02:00  INFO 34772 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-19T17:26:59.597+02:00 ERROR 34772 --- [http-nio-1452-exec-5] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)
+2023-05-19T17:26:59.600+02:00 ERROR 34772 --- [http-nio-1452-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)] with root cause
+
+org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)
+	at org.sqlite.core.DB.newSQLException(DB.java:1179) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.core.DB.newSQLException(DB.java:1190) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.core.DB.throwex(DB.java:1150) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.core.NativeDB._exec_utf8(Native Method) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.core.NativeDB._exec(NativeDB.java:93) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.jdbc3.JDBC3Statement.lambda$executeLargeUpdate$2(JDBC3Statement.java:128) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.jdbc3.JDBC3Statement.withConnectionTimeout(JDBC3Statement.java:454) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.jdbc3.JDBC3Statement.executeLargeUpdate(JDBC3Statement.java:115) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.jdbc3.JDBC3Statement.executeUpdate(JDBC3Statement.java:102) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at com.user.management.services.UserOperation.createUser(UserOperation.java:117) ~[classes/:na]
+	at com.user.management.controller.AppController.insertUser(AppController.java:33) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.8.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.8.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2023-05-19T17:36:36.399+02:00  INFO 43800 --- [main] c.user.management.ManagementApplication  : Starting ManagementApplication using Java 17.0.6 with PID 43800 (E:\USERSMGT\BE\UserAccountManagement-BE\management\target\classes started by carine.iradukunda in E:\USERSMGT\BE\UserAccountManagement-BE\management)
+2023-05-19T17:36:36.401+02:00  INFO 43800 --- [main] c.user.management.ManagementApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-05-19T17:36:36.960+02:00  INFO 43800 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 1452 (http)
+2023-05-19T17:36:36.965+02:00  INFO 43800 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-19T17:36:36.966+02:00  INFO 43800 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-19T17:36:37.027+02:00  INFO 43800 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-19T17:36:37.028+02:00  INFO 43800 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 598 ms
+2023-05-19T17:36:37.261+02:00  INFO 43800 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 1452 (http) with context path ''
+2023-05-19T17:36:37.267+02:00  INFO 43800 --- [main] c.user.management.ManagementApplication  : Started ManagementApplication in 1.133 seconds (process running for 1.613)
+2023-05-19T17:36:43.559+02:00  INFO 43800 --- [http-nio-1452-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-19T17:36:43.559+02:00  INFO 43800 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-19T17:36:43.560+02:00  INFO 43800 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-19T17:36:43.881+02:00 ERROR 43800 --- [http-nio-1452-exec-1] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)
+2023-05-19T17:36:43.887+02:00 ERROR 43800 --- [http-nio-1452-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.RuntimeException: org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)] with root cause
+
+org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)
+	at org.sqlite.core.DB.newSQLException(DB.java:1179) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.core.DB.newSQLException(DB.java:1190) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.core.DB.throwex(DB.java:1150) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.core.NativeDB._exec_utf8(Native Method) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.core.NativeDB._exec(NativeDB.java:93) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.jdbc3.JDBC3Statement.lambda$executeLargeUpdate$2(JDBC3Statement.java:128) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.jdbc3.JDBC3Statement.withConnectionTimeout(JDBC3Statement.java:454) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.jdbc3.JDBC3Statement.executeLargeUpdate(JDBC3Statement.java:115) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at org.sqlite.jdbc3.JDBC3Statement.executeUpdate(JDBC3Statement.java:102) ~[sqlite-jdbc-3.41.2.1.jar:na]
+	at com.user.management.services.UserOperation.createUser(UserOperation.java:120) ~[classes/:na]
+	at com.user.management.controller.AppController.insertUser(AppController.java:33) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1081) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:974) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.8.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.0.8.jar:6.0.8]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.8.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.8.jar:6.0.8]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
+
+2023-05-19T17:37:56.442+02:00  INFO 26600 --- [main] c.user.management.ManagementApplication  : Starting ManagementApplication using Java 17.0.6 with PID 26600 (E:\USERSMGT\BE\UserAccountManagement-BE\management\target\classes started by carine.iradukunda in E:\USERSMGT\BE\UserAccountManagement-BE\management)
+2023-05-19T17:37:56.444+02:00  INFO 26600 --- [main] c.user.management.ManagementApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-05-19T17:37:57.075+02:00  INFO 26600 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 1452 (http)
+2023-05-19T17:37:57.081+02:00  INFO 26600 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-19T17:37:57.081+02:00  INFO 26600 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-19T17:37:57.143+02:00  INFO 26600 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-19T17:37:57.143+02:00  INFO 26600 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 669 ms
+2023-05-19T17:37:57.382+02:00  INFO 26600 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 1452 (http) with context path ''
+2023-05-19T17:37:57.389+02:00  INFO 26600 --- [main] c.user.management.ManagementApplication  : Started ManagementApplication in 1.244 seconds (process running for 1.68)
+2023-05-19T17:38:24.596+02:00  INFO 26600 --- [http-nio-1452-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-19T17:38:24.596+02:00  INFO 26600 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-19T17:38:24.597+02:00  INFO 26600 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-19T17:38:24.819+02:00 ERROR 26600 --- [http-nio-1452-exec-1] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)
+2023-05-19T17:38:30.402+02:00 ERROR 26600 --- [http-nio-1452-exec-8] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)
+2023-05-19T17:39:59.545+02:00 ERROR 26600 --- [http-nio-1452-exec-2] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)
+2023-05-19T17:40:32.011+02:00 ERROR 26600 --- [http-nio-1452-exec-9] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)
+2023-05-19T17:40:33.376+02:00 ERROR 26600 --- [http-nio-1452-exec-10] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)
+2023-05-19T17:41:02.114+02:00 ERROR 26600 --- [http-nio-1452-exec-1] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)
+2023-05-19T17:42:31.519+02:00 ERROR 26600 --- [http-nio-1452-exec-7] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: User.NID)
+2023-05-19T17:43:02.437+02:00  INFO 39904 --- [main] c.user.management.ManagementApplication  : Starting ManagementApplication using Java 17.0.6 with PID 39904 (E:\USERSMGT\BE\UserAccountManagement-BE\management\target\classes started by carine.iradukunda in E:\USERSMGT\BE\UserAccountManagement-BE\management)
+2023-05-19T17:43:02.439+02:00  INFO 39904 --- [main] c.user.management.ManagementApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-05-19T17:43:02.997+02:00  INFO 39904 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 1452 (http)
+2023-05-19T17:43:03.004+02:00  INFO 39904 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-19T17:43:03.004+02:00  INFO 39904 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-19T17:43:03.065+02:00  INFO 39904 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-19T17:43:03.065+02:00  INFO 39904 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 600 ms
+2023-05-19T17:43:03.299+02:00  INFO 39904 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 1452 (http) with context path ''
+2023-05-19T17:43:03.305+02:00  INFO 39904 --- [main] c.user.management.ManagementApplication  : Started ManagementApplication in 1.132 seconds (process running for 1.528)
+2023-05-19T17:43:06.263+02:00  INFO 39904 --- [http-nio-1452-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-19T17:43:06.263+02:00  INFO 39904 --- [http-nio-1452-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-19T17:43:06.264+02:00  INFO 39904 --- [http-nio-1452-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-19T17:43:06.501+02:00 ERROR 39904 --- [http-nio-1452-exec-2] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_ERROR] SQL error or missing database (no such column: TIMESTAMP)
+2023-05-19T17:43:06.508+02:00 ERROR 39904 --- [http-nio-1452-exec-1] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_ERROR] SQL error or missing database (no such column: TIMESTAMP)
+2023-05-19T17:43:22.374+02:00 ERROR 39904 --- [http-nio-1452-exec-6] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_ERROR] SQL error or missing database (no such column: TIMESTAMP)
+2023-05-19T17:43:22.379+02:00 ERROR 39904 --- [http-nio-1452-exec-3] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_ERROR] SQL error or missing database (no such column: TIMESTAMP)
+2023-05-19T17:44:07.798+02:00 ERROR 39904 --- [http-nio-1452-exec-4] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_ERROR] SQL error or missing database (no such column: TIMESTAMP)
+2023-05-19T17:44:28.342+02:00  INFO 41152 --- [main] c.user.management.ManagementApplication  : Starting ManagementApplication using Java 17.0.6 with PID 41152 (E:\USERSMGT\BE\UserAccountManagement-BE\management\target\classes started by carine.iradukunda in E:\USERSMGT\BE\UserAccountManagement-BE\management)
+2023-05-19T17:44:28.344+02:00  INFO 41152 --- [main] c.user.management.ManagementApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-05-19T17:44:28.913+02:00  INFO 41152 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 1452 (http)
+2023-05-19T17:44:28.918+02:00  INFO 41152 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-19T17:44:28.919+02:00  INFO 41152 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-19T17:44:28.977+02:00  INFO 41152 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-19T17:44:28.977+02:00  INFO 41152 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 605 ms
+2023-05-19T17:44:29.206+02:00  INFO 41152 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 1452 (http) with context path ''
+2023-05-19T17:44:29.211+02:00  INFO 41152 --- [main] c.user.management.ManagementApplication  : Started ManagementApplication in 1.133 seconds (process running for 1.525)
+2023-05-19T17:44:32.722+02:00  INFO 41152 --- [http-nio-1452-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-19T17:44:32.723+02:00  INFO 41152 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-19T17:44:32.723+02:00  INFO 41152 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-05-19T17:44:32.950+02:00 ERROR 41152 --- [http-nio-1452-exec-1] com.user.management.util.AppLogger       : Error While Signing up [SQLITE_ERROR] SQL error or missing database (no such column: TIME)
+2023-05-19T17:44:44.506+02:00  INFO 38520 --- [main] c.user.management.ManagementApplication  : Starting ManagementApplication using Java 17.0.6 with PID 38520 (E:\USERSMGT\BE\UserAccountManagement-BE\management\target\classes started by carine.iradukunda in E:\USERSMGT\BE\UserAccountManagement-BE\management)
+2023-05-19T17:44:44.507+02:00  INFO 38520 --- [main] c.user.management.ManagementApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-05-19T17:44:45.059+02:00  INFO 38520 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 1452 (http)
+2023-05-19T17:44:45.065+02:00  INFO 38520 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-19T17:44:45.065+02:00  INFO 38520 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-19T17:44:45.122+02:00  INFO 38520 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-19T17:44:45.123+02:00  INFO 38520 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 590 ms
+2023-05-19T17:44:45.342+02:00  INFO 38520 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 1452 (http) with context path ''
+2023-05-19T17:44:45.348+02:00  INFO 38520 --- [main] c.user.management.ManagementApplication  : Started ManagementApplication in 1.101 seconds (process running for 1.499)
+2023-05-19T17:44:46.363+02:00  INFO 38520 --- [http-nio-1452-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-19T17:44:46.363+02:00  INFO 38520 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-19T17:44:46.364+02:00  INFO 38520 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-19T17:45:41.841+02:00  INFO 33600 --- [main] c.user.management.ManagementApplication  : Starting ManagementApplication using Java 17.0.6 with PID 33600 (E:\USERSMGT\BE\UserAccountManagement-BE\management\target\classes started by carine.iradukunda in E:\USERSMGT\BE\UserAccountManagement-BE\management)
+2023-05-19T17:45:41.843+02:00  INFO 33600 --- [main] c.user.management.ManagementApplication  : No active profile set, falling back to 1 default profile: "default"
+2023-05-19T17:45:42.419+02:00  INFO 33600 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 1452 (http)
+2023-05-19T17:45:42.426+02:00  INFO 33600 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-19T17:45:42.426+02:00  INFO 33600 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2023-05-19T17:45:42.491+02:00  INFO 33600 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-19T17:45:42.491+02:00  INFO 33600 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 623 ms
+2023-05-19T17:45:42.731+02:00  INFO 33600 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 1452 (http) with context path ''
+2023-05-19T17:45:42.737+02:00  INFO 33600 --- [main] c.user.management.ManagementApplication  : Started ManagementApplication in 1.154 seconds (process running for 1.539)
+2023-05-19T17:45:46.474+02:00  INFO 33600 --- [http-nio-1452-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-19T17:45:46.474+02:00  INFO 33600 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-19T17:45:46.474+02:00  INFO 33600 --- [http-nio-1452-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
