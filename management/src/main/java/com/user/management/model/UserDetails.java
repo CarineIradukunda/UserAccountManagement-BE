@@ -13,7 +13,7 @@ public record UserDetails(
       String dob,
       String maritalStatus,
       String nationality,
-      Integer nid,
+      String nid,
       String password,
       String email
 ) implements Serializable {

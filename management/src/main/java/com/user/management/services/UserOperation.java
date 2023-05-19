@@ -3,6 +3,7 @@ package com.user.management.services;
 import com.user.management.model.User;
 import com.user.management.model.UserDetails;
 import com.user.management.model.UserResponse;
+import com.user.management.util.AppLogger;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
@@ -46,10 +47,17 @@ public class UserOperation implements UserOperator {
             return subs;
 
         } catch (SQLException e) {
-            System.out.println("Error Connecting to the DB");
+            AppLogger.LOGGER.error("Error While Fetching users" +  e.getMessage());
             throw new RuntimeException(e);
         }
-
+        finally {
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException e) {
+                AppLogger.LOGGER.error("SQL server exception While Fetching users " + e.getMessage());
+            }
+        }
 
 
     }
@@ -71,7 +79,7 @@ public class UserOperation implements UserOperator {
             connection = DriverManager.getConnection(jdbcUrl);
             String sql = "INSERT INTO User (Names,Gender,Age,DOB,MaritalStatus,Nationality,NID,AccountStatus,Creation_Time,Password,Email)" +
                     "values ('"+ userDetails.names()+"','"+ userDetails.gender()+"','"+ userDetails.age()+"'," +
-                    "'"+ userDetails.dob()+"','"+ userDetails.maritalStatus()+"','"+ userDetails.nationality()+"','"+ userDetails.nid()+"','UNVERIFIED',DATE(),'"+encryptedPwd+"','"+userDetails.email()+"')";
+                    "'"+ userDetails.dob()+"','"+ userDetails.maritalStatus()+"','"+ userDetails.nationality()+"','"+ userDetails.nid().trim()+"','UNVERIFIED',DATE(),'"+encryptedPwd+"','"+userDetails.email()+"')";
             Statement statement = connection.createStatement();
             int resultSet = statement.executeUpdate(sql);
             if (resultSet > 0) {
@@ -86,10 +94,18 @@ public class UserOperation implements UserOperator {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            AppLogger.LOGGER.error("Error While Signing up "+e.getMessage());
             response.setMessage(e.getMessage());
             response.setStatusCode(1004);
             throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException e) {
+                AppLogger.LOGGER.error("SQL server exception While Signing up " + e.getMessage());
+            }
         }
 
         return response;
@@ -107,14 +123,14 @@ public class UserOperation implements UserOperator {
         try {
             String jdbcUrl = environment.getProperty("connection");
             connection = DriverManager.getConnection(jdbcUrl);
-            String responseQuery = "SELECT * FROM User WHERE NID = '"+userDetails.nid()+"'";
+            String responseQuery = "SELECT * FROM User WHERE NID = '"+userDetails.nid().trim()+"'";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(responseQuery);
             while (resultSet.next()){
                 encryptedPwd = resultSet.getString("Password");
             }
             if(BCrypt.checkpw(pwd,encryptedPwd)){
-                String responseQuery2 = "SELECT * FROM User WHERE NID = '" + userDetails.nid() + "'";
+                String responseQuery2 = "SELECT * FROM User WHERE NID = '" + userDetails.nid().trim() + "'";
                 Statement statement1 = connection.createStatement();
                 ResultSet resultSet1 = statement1.executeQuery(responseQuery2);
                 while (resultSet1.next()) {
@@ -130,10 +146,19 @@ public class UserOperation implements UserOperator {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error Connecting to the DB");
+            AppLogger.LOGGER.error("Error While Logging in" + e.getMessage());
             response.setMessage(e.getMessage());
             response.setStatusCode(1004);
             throw new RuntimeException(e);
+
+        }
+        finally {
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException e) {
+                AppLogger.LOGGER.error("SQL server exception While Logging in" + e.getMessage());
+            }
         }
 
         return response;
@@ -162,10 +187,19 @@ public class UserOperation implements UserOperator {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Error Connecting to the DB");
+            AppLogger.LOGGER.error("Error While A user requests verification"+ e.getMessage());
             response.setMessage(e.getMessage());
             response.setStatusCode(1004);
             throw new RuntimeException(e);
+
+        }
+        finally {
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException e) {
+                AppLogger.LOGGER.error("SQL server exception while A user requests verification " + e.getMessage());
+            }
         }
 
         return response;
@@ -195,10 +229,18 @@ public class UserOperation implements UserOperator {
                 }
             }
         } catch (SQLException e) {
-            System.out.println("Error Connecting to the DB");
+            AppLogger.LOGGER.error("Error While Verifying the user" + e.getMessage());
             response.setMessage(e.getMessage());
             response.setStatusCode(1004);
             throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                if (connection != null)
+                    connection.close();
+            } catch (SQLException e) {
+                AppLogger.LOGGER.error("SQL server exception Verifying the user" + e.getMessage());
+            }
         }
 
         return response;
