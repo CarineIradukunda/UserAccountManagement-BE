@@ -14,10 +14,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserResponse {
+    private String nid;
     private String email;
     private String names;
     private String message;
     private int statusCode;
+
 
 
 

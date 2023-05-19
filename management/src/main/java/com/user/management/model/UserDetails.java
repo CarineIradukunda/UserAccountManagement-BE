@@ -7,7 +7,6 @@ import java.io.Serializable;
  */
 public record UserDetails(
       String names,
-      String firstName,
       String gender,
       int age,
       String dob,

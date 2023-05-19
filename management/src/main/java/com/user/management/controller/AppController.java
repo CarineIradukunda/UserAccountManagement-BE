@@ -33,6 +33,11 @@ public class AppController {
         return userOperator.createUser(userDetails);
     }
 
+    @PostMapping("/one")
+    public Object oneUser(@RequestBody  UserDetails userDetails){
+        return userOperator.getUser(userDetails);
+    }
+
     @PostMapping("/login")
     public Object checkUser(@RequestBody  UserDetails userDetails){
         return userOperator.login(userDetails);

@@ -11,7 +11,9 @@ import java.util.List;
 public interface UserOperator {
     List<User> getUsers();
 
-    Object getUser(int id);
+
+
+    Object getUser(UserDetails userDetails);
 
     Object createUser(UserDetails userDetails);
 

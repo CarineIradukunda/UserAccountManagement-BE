@@ -65,8 +65,41 @@ public class UserOperation implements UserOperator {
 
 
     @Override
-    public Object getUser(int id){
-        return null;
+    public Object getUser(UserDetails userDetails){
+        var response = new UserResponse();
+        Connection connection = null;
+        try {
+            String jdbcUrl = environment.getProperty("connection");
+            connection = DriverManager.getConnection(jdbcUrl);
+            String responseQuery = "SELECT * FROM User WHERE NID = '" + userDetails.nid().trim() + "'";
+            Statement statement1 = connection.createStatement();
+            ResultSet resultSet1 = statement1.executeQuery(responseQuery);
+            while (resultSet1.next()) {
+                response.setNames(resultSet1.getString("Names"));
+                response.setEmail(resultSet1.getString("Email"));
+                response.setNid(resultSet1.getString("NID"));
+                response.setMessage("Success");
+                response.setStatusCode(1000);
+
+            }
+            throw new RuntimeException();
+        }catch (SQLException e) {
+                AppLogger.LOGGER.error("Error While  Getting one user" + e.getMessage());
+                response.setMessage(e.getMessage());
+                response.setStatusCode(1004);
+                throw new RuntimeException(e);
+
+            }
+        finally {
+                try {
+                    if (connection != null)
+                        connection.close();
+                } catch (SQLException e) {
+                    AppLogger.LOGGER.error("SQL server exception While Getting one user" + e.getMessage());
+                }
+            }
+
+
     }
 
     @Override
@@ -74,13 +107,14 @@ public class UserOperation implements UserOperator {
         var response = new UserResponse();
         Connection connection = null;
         var pwd = userDetails.password();
+        var nid = userDetails.nid().trim();
         var encryptedPwd= BCrypt.hashpw(pwd,BCrypt.gensalt());
         try {
             String jdbcUrl = environment.getProperty("connection");
             connection = DriverManager.getConnection(jdbcUrl);
             String sql = "INSERT INTO User (Names,Gender,Age,DOB,MaritalStatus,Nationality,NID,AccountStatus,Creation_Time,Password,Email)" +
                     "values ('"+ userDetails.names()+"','"+ userDetails.gender()+"','"+ userDetails.age()+"'," +
-                    "'"+ userDetails.dob()+"','"+ userDetails.maritalStatus()+"','"+ userDetails.nationality()+"','"+ userDetails.nid().trim()+"','UNVERIFIED',DATE(),'"+encryptedPwd+"','"+userDetails.email().trim()+"')";
+                    "'"+ userDetails.dob()+"','"+ userDetails.maritalStatus()+"','"+ userDetails.nationality()+"','"+ nid+"','UNVERIFIED',DATE(),'"+encryptedPwd+"','"+userDetails.email().trim()+"')";
             Statement statement = connection.createStatement();
             int resultSet = statement.executeUpdate(sql);
             if (resultSet > 0) {
@@ -94,6 +128,8 @@ public class UserOperation implements UserOperator {
                     response.setStatusCode(1000);
                 }
             }
+            return response;
+
         } catch (SQLException e) {
             AppLogger.LOGGER.error("Error While Signing up "+e.getMessage());
             response.setMessage(e.getMessage());
@@ -109,7 +145,7 @@ public class UserOperation implements UserOperator {
             }
         }
 
-        return response;
+
     }
 
 
@@ -123,14 +159,14 @@ public class UserOperation implements UserOperator {
         try {
             String jdbcUrl = environment.getProperty("connection");
             connection = DriverManager.getConnection(jdbcUrl);
-            String responseQuery = "SELECT * FROM User WHERE NID = '"+userDetails.nid().trim()+"'";
+            String responseQuery = "SELECT * FROM User WHERE NID = '"+ userDetails.nid().trim()+"'";
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(responseQuery);
             while (resultSet.next()){
                 encryptedPwd = resultSet.getString("Password");
             }
             if(BCrypt.checkpw(pwd,encryptedPwd)){
-                String responseQuery2 = "SELECT * FROM User WHERE NID = '" + userDetails.nid().trim() + "'";
+                String responseQuery2 = "SELECT * FROM User WHERE NID = '" + userDetails.nid().trim()+ "'";
                 Statement statement1 = connection.createStatement();
                 ResultSet resultSet1 = statement1.executeQuery(responseQuery2);
                 while (resultSet1.next()) {
@@ -172,11 +208,11 @@ public class UserOperation implements UserOperator {
         try {
             String jdbcUrl = environment.getProperty("connection");
             connection = DriverManager.getConnection(jdbcUrl);
-            String sql = "UPDATE User set AccountStatus = 'PENDING VERIFICATION' where EMAIL = '"+userDetails.email()+"' And AccountStatus = 'UNVERIFIED'";
+            String sql = "UPDATE User set AccountStatus = 'PENDING VERIFICATION' where NID = '"+ userDetails.nid() +"'";
             Statement statement = connection.createStatement();
             int resultSet = statement.executeUpdate(sql);
             if (resultSet > 0) {
-                String responseQuery = "SELECT * FROM User WHERE EMAIL = '"+userDetails.email()+"'";
+                String responseQuery = "SELECT * FROM User WHERE NID = '" + userDetails.nid().trim()+ "'";
                 Statement statement1 = connection.createStatement();
                 ResultSet resultSet1 = statement1.executeQuery(responseQuery);
                 while (resultSet1.next()){
@@ -214,11 +250,11 @@ public class UserOperation implements UserOperator {
         try {
             String jdbcUrl = environment.getProperty("connection");
             connection = DriverManager.getConnection(jdbcUrl);
-            String sql = "UPDATE User set AccountStatus = 'VERIFIED' where EMAIL = '"+userDetails.email()+"' And AccountStatus = 'PENDING VERIFICATION'";
+            String sql = "UPDATE User set AccountStatus = 'VERIFIED' where  NID = '"+ userDetails.nid() +"' And AccountStatus = 'PENDING VERIFICATION'";
             Statement statement = connection.createStatement();
             int resultSet = statement.executeUpdate(sql);
             if (resultSet > 0) {
-                String responseQuery = "SELECT * FROM User WHERE EMAIL = '"+userDetails.email()+"'";
+                String responseQuery = "SELECT * FROM User WHERE NID = '" + userDetails.nid().trim()+ "'";
                 Statement statement1 = connection.createStatement();
                 ResultSet resultSet1 = statement1.executeQuery(responseQuery);
                 while (resultSet1.next()){
