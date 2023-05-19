@@ -39,9 +39,10 @@ public class UserOperation implements UserOperator {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                subs.add(new User(resultSet.getString(2),
-                        resultSet.getString(14),
-                        resultSet.getString(10)));
+                subs.add(new User(resultSet.getString(1),
+                        resultSet.getString(12),
+                        resultSet.getString(8),
+                        resultSet.getString(7)));
             }
 
             return subs;
@@ -79,11 +80,11 @@ public class UserOperation implements UserOperator {
             connection = DriverManager.getConnection(jdbcUrl);
             String sql = "INSERT INTO User (Names,Gender,Age,DOB,MaritalStatus,Nationality,NID,AccountStatus,Creation_Time,Password,Email)" +
                     "values ('"+ userDetails.names()+"','"+ userDetails.gender()+"','"+ userDetails.age()+"'," +
-                    "'"+ userDetails.dob()+"','"+ userDetails.maritalStatus()+"','"+ userDetails.nationality()+"','"+ userDetails.nid().trim()+"','UNVERIFIED',DATE(),'"+encryptedPwd+"','"+userDetails.email()+"')";
+                    "'"+ userDetails.dob()+"','"+ userDetails.maritalStatus()+"','"+ userDetails.nationality()+"','"+ userDetails.nid().trim()+"','UNVERIFIED',DATE(),'"+encryptedPwd+"','"+userDetails.email().trim()+"')";
             Statement statement = connection.createStatement();
             int resultSet = statement.executeUpdate(sql);
             if (resultSet > 0) {
-                String responseQuery = "SELECT * FROM User WHERE EMAIL = '"+userDetails.email()+"'";
+                String responseQuery = "SELECT * FROM User WHERE NID = '"+userDetails.nid().trim()+"'";
                 Statement statement1 = connection.createStatement();
                 ResultSet resultSet1 = statement1.executeQuery(responseQuery);
                 while (resultSet1.next()){
