@@ -117,7 +117,6 @@ public class UserOperation implements UserOperator {
         var response = new UserResponse();
         Connection connection = null;
         var pwd = userDetails.password().trim();
-        System.out.println("NID:"+userDetails.nid() +" PWD" +pwd);
         var encryptedPwd ="";
 
         try {
