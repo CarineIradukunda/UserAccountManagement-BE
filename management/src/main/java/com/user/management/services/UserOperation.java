@@ -6,9 +6,7 @@ import com.user.management.model.UserResponse;
 import com.user.management.util.AppLogger;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,6 @@ import java.util.List;
  */
 
 @Service
-@Component
 public class UserOperation implements UserOperator {
 
     final Environment environment;
